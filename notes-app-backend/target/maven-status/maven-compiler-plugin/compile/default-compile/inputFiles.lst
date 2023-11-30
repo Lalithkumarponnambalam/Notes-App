@@ -1,0 +1,11 @@
+/home/lalith/Notes-app/notes-backend/src/main/java/com/example/pharmacy/controller/NotesController.java
+/home/lalith/Notes-app/notes-backend/src/main/java/com/example/pharmacy/service/NotesService.java
+/home/lalith/Notes-app/notes-backend/src/main/java/com/example/pharmacy/model/User.java
+/home/lalith/Notes-app/notes-backend/src/main/java/com/example/pharmacy/repositiory/UserRepository.java
+/home/lalith/Notes-app/notes-backend/src/main/java/com/example/pharmacy/repositiory/NotesRepository.java
+/home/lalith/Notes-app/notes-backend/src/main/java/com/example/pharmacy/controller/UserController.java
+/home/lalith/Notes-app/notes-backend/src/main/java/com/example/pharmacy/model/Notes.java
+/home/lalith/Notes-app/notes-backend/src/main/java/com/example/pharmacy/PharmacyApplication.java
+/home/lalith/Notes-app/notes-backend/src/main/java/com/example/pharmacy/service/UserServiceImpl.java
+/home/lalith/Notes-app/notes-backend/src/main/java/com/example/pharmacy/service/UserService.java
+/home/lalith/Notes-app/notes-backend/src/main/java/com/example/pharmacy/service/NotesServiceImpl.java
