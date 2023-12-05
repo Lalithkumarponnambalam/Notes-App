@@ -45,7 +45,7 @@ Ensure you have XAMPP server installed.Open your web browser and enter
   `cd /opt/lampp` and `sudo ./lampp start`.
 - For the first time only Update and Install maven: `sudo apt update` and 
   `sudo apt install maven`
-- To start the back end `mvn org.springframework.boot:spring-boot-maven-plugin:run`
+- To start the back end `mvn org.springframework.boot:spring-boot-maven-plugin:run` or `mvn spring-boot:run`
 
 ## Continuous Integration (optional)
 
