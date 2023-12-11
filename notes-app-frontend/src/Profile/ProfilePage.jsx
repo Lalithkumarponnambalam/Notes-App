@@ -32,7 +32,7 @@ const PorfilePage = () => {
         <View >
             <View style={[tw`items-center justify-center`]}>
             <Image
-                source={require('/home/lalith/Notes-app/notes-frontend/assets/images.jpeg')}
+                source={require('/home/lalith/projects/Notes-App/assets/images.jpeg')}
                 style={tw`w-35 h-35 rounded-full mt-20`}
             />
             <Text style={tw`mt-5`}>{username}</Text>

@@ -6,7 +6,7 @@ import EditNotes from './src/Notes/EditNotes';
 import RegisterForm from './src/auth/RegisterForm';
 import NotesHome from './src/Notes/NotesHome';
 import TaskHome from './src/Task/TaskHome';
-import AppHome from './src/AppHome';
+import AppHome from './AppHome';
 import EditProfile from './src/Profile/EditProfile';
 import PorfilePage from './src/Profile/ProfilePage';
 
