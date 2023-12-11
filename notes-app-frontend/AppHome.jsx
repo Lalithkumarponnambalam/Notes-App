@@ -1,12 +1,11 @@
-import { FontAwesome5 } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 import { View, Text, FlatList, Dimensions, TouchableOpacity } from 'react-native';
 import tw from 'twrnc';
-import NotesHome from "./Notes/NotesHome";
+import NotesHome from "./src/Notes/NotesHome";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
-import TaskHome from "./Task/TaskHome";
+import TaskHome from "./src/Task/TaskHome";
 import { Image } from 'react-native';
 
 const AppHome = () => {
@@ -52,7 +51,7 @@ const AppHome = () => {
                 <Text style={tw`text-lg font-bold`}>Hey, {username}</Text>
                 <TouchableOpacity onPress={handleProfile}>
                     <Image
-                        source={require('/home/lalith/Notes-app/notes-frontend/assets/images.jpeg')}
+                        source={require('/home/lalith/projects/Notes-App/assets/images.jpeg')}
                         style={tw`w-15 h-15 rounded-full mt-5`}
                     />
                 </TouchableOpacity>

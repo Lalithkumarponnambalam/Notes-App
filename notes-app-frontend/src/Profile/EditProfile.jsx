@@ -47,7 +47,7 @@ const EditProfile = ({ navigation }) => {
       .then((response) => {
         console.log('User data updated:', response.data);
         Alert.alert('User data updated successfully!');
-        navigation.navigate('Home'); // Navigate to Home after successful save
+        navigation.navigate('Home'); 
       })
       .catch((error) => {
         console.error('Error updating user data:', error);

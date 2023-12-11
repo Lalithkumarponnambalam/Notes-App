@@ -4,7 +4,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import tw from 'twrnc';
-import { AntDesign, Entypo, Feather, Ionicons, } from '@expo/vector-icons';
+import { AntDesign, Entypo, Feather, Ionicons, MaterialCommunityIcons, } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 
 const NotesHome = () => {
@@ -15,11 +15,15 @@ const NotesHome = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const categoriesPairs = [
-    ['Work', 'Personal'],
-    ['Health', 'Education'],
-    ['Travel', 'Shopping'],
-    ['Food', 'Events'],
+  const categories = [
+    'Personal',
+    'Work',
+    'Travel',
+    'Health',
+    'Food',
+    'Shopping',
+    'Events',
+    'Education',
   ];
 
   const navigation = useNavigation();
@@ -137,58 +141,55 @@ const NotesHome = () => {
 
   return (
     <View style={tw`flex-1`}>
-      <View style={tw`rounded-t-3xl mt-5 bg-gray-50 flex-1 relative p-2`}>
-      <View style={tw`flex-row items-center justify-between p-3`}>
-        <View style={tw`border border-gray-200 rounded-full px-3 py-2 flex-row items-center w-78`}>
-          <Feather name="search" size={20} color="gray" style={tw`mr-2`} />
-          <TextInput
-            style={tw`flex-1 text-base`}
-            placeholder="Search notes"
-            value={searchQuery}
-            onChangeText={handleSearch}
-          />
+      <View style={tw`bg-gray-100 flex-1 relative p-2`}>
+        <View style={tw`flex-row items-center justify-between p-3`}>
+          <View style={tw` bg-gray-200 rounded-full px-3 py-2 flex-row items-center w-78`}>
+            <Feather name="search" size={20} color="gray" style={tw`mr-2`} />
+            <TextInput
+              style={tw`flex-1 text-base`}
+              placeholder="Search notes"
+              value={searchQuery}
+              onChangeText={handleSearch}
+            />
+          </View>
+          <TouchableOpacity onPress={toggleModal}>
+            <Ionicons name="filter" size={24} color="gray" style={tw`ml-4`} />
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={toggleModal}>
-          <Ionicons name="filter" size={24} color="gray" style={tw`ml-4`} />
-        </TouchableOpacity>
-      </View>
         <Modal visible={showModal} animationType="slide" transparent>
           <TouchableOpacity
             style={tw`flex-1 justify-center items-center bg-black bg-opacity-60`}
-            onPress={toggleModal} 
+            onPress={toggleModal}
           >
-          <View style={tw`bg-white p-4 rounded-xl w-80`}>
-            <Text style={tw`font-bold`}>Sort & Filter</Text>
-            <View style={tw`border-t border-gray-100 w-full mt-2 mb-2`} />
-            {categoriesPairs.map((pair, index) => (
-              <View style={tw`flex-row justify-between`} key={index}>
-                {pair.map((item) => (
-                  <TouchableOpacity
-                    style={tw`flex-row items-center mb-2`}
-                    key={item}
-                    onPress={() => handleCategorySelection(item)}
-                  >
-                    <Ionicons
-                      name={selectedCategories.includes(item) ? 'checkbox-outline' : 'square-outline'}
-                      size={24}
-                      color="black"
-                      style={tw`mr-2`}
-                    />
-                    <Text>{item}</Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
-            ))}
-            <TouchableOpacity
-              style={tw`bg-blue-500 py-2 mt-2 rounded-md`}
-              onPress={() => {
-                filterNotesByCategories();
-                toggleModal();
-              }}
-            >
-              <Text style={tw`text-white text-center`}>Apply</Text>
-            </TouchableOpacity>
-          </View>
+            <View style={tw`bg-white p-4 rounded-xl w-60`}>
+              <Text style={tw`font-bold`}>Sort & Filter</Text>
+              <View style={tw`border-t border-gray-100 w-full mt-2 mb-2`} />
+              {categories.map((category, index) => (
+                <TouchableOpacity
+                  style={tw`flex-row items-center mb-2`}
+                  key={index}
+                  onPress={() => handleCategorySelection(category)}
+                >
+                  <Ionicons
+                    name={selectedCategories.includes(category) ? 'checkbox-outline' : 'square-outline'}
+                    size={24}
+                    color="black"
+                    style={tw`mr-2`}
+                  />
+                  <Text>{category}</Text>
+                </TouchableOpacity>
+              ))}
+
+              <TouchableOpacity
+                style={tw`bg-blue-500 py-2 mt-2 rounded-md`}
+                onPress={() => {
+                  filterNotesByCategories();
+                  toggleModal();
+                }}
+              >
+                <Text style={tw`text-white text-center`}>Apply</Text>
+              </TouchableOpacity>
+            </View>
           </TouchableOpacity>
         </Modal>
         <FlatList
@@ -197,7 +198,7 @@ const NotesHome = () => {
           keyExtractor={(item) => item.notesId.toString()}
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => handleEditNotes(item.notesId)}>
-              <View style={[tw`bg-white border border-gray-200 rounded-xl mt-3 mx-2 p-3`, { width: screenWidth / 1 - 36, height: 120 }]}>
+              <View style={[tw`bg-white rounded-xl mt-3 mx-2 p-3`, { width: screenWidth / 1 - 36, height: 120 }]}>
                 <View style={tw`flex-row justify-between`}>
                   <View style={tw`flex-1`}>
                     <Text
@@ -212,13 +213,13 @@ const NotesHome = () => {
                     <Text
                       style={[
                         tw`text-xs font-bold text-white rounded-full px-3 py-1 text-right`,
-                        item.category === 'Travel' ? tw`bg-green-500 w-20 text-center` :
-                          item.category === 'Work' ? tw`bg-pink-500 w-20 text-center` :
-                            item.category === 'Personal' ? tw`bg-blue-500 w-20 text-center` :
-                              item.category === 'Health' ? tw`bg-orange-500 w-20 text-center` :
-                                item.category === 'Food' ? tw`bg-amber-500 w-20 text-center` :
-                                  item.category === 'Shopping' ? tw`bg-indigo-500 w-20 text-center` :
-                                    item.category === 'Events' ? tw`bg-cyan-500 w-20 text-center` :
+                        item.category === 'Travel' ? tw`bg-green-500 w-19 text-center` :
+                          item.category === 'Work' ? tw`bg-pink-500 w-19 text-center` :
+                            item.category === 'Personal' ? tw`bg-yellow-500 w-19 text-center` :
+                              item.category === 'Health' ? tw`bg-orange-500 w-19 text-center` :
+                                item.category === 'Food' ? tw`bg-emerald-500 w-19 text-center` :
+                                  item.category === 'Shopping' ? tw`bg-indigo-500 w-19 text-center` :
+                                    item.category === 'Events' ? tw`bg-cyan-500 w-19 text-center` :
                                       item.category === 'Education' ? tw`bg-purple-500 w-20` :
                                         tw``
                       ]}
@@ -238,7 +239,7 @@ const NotesHome = () => {
                 <View style={tw`flex-row justify-between mt-2 mb-2`}>
                   <View style={tw`flex-row items-center`}>
                     <AntDesign name="calendar" size={18} color="black" style={tw`mr-2`} />
-                    <View style={tw``}>
+                    <View>
                       {item.updatedDate ? (
                         <Text>{formatDate(item.updatedDate, item.updatedDate)}</Text>
                       ) : (
@@ -255,10 +256,9 @@ const NotesHome = () => {
         />
       </View>
       <TouchableOpacity
-        style={tw`absolute bottom-10 right-5 rounded-full bg-white`}
-        onPress={handleAddNotes}
-      >
-        <Entypo name="circle-with-plus" size={60} color={`rgb(252, 165, 165)`} />
+        style={tw`absolute bottom-20 p-3 right-6 rounded-full bg-blue-500 shadow`}
+        onPress={handleAddNotes}>
+        <MaterialCommunityIcons name="pencil" size={30} color="white" />
       </TouchableOpacity>
     </View>
   );
